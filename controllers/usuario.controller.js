@@ -1,18 +1,15 @@
-const sqlite = require("../config/db.js");
 const models = require("../models");
-const sequelize = require("sequelize");
-const veiculoModel = models.veiculoModel;
-const Op = require("sequelize").Op;
+const usuarioModel = models.usuarioModel;
 
-class VeiculoController {
-  static criarVeiculo = async (req, res) => {
+class UsuarioController {
+  static cadastrarUsuario = async (req, res) => {
     try {
       console.log(req.body);
-      const veiculoInfo = await veiculoModel.create({
+      const usuarioInfo = await usuarioModel.create({
         nome: req.body.nome,
       });
-      await veiculoInfo.save();
-      if (!veiculoInfo) {
+      await usuarioInfo.save();
+      if (!usuarioInfo) {
         return res.status(200).send({
           status: 404,
           message: "No data found",
@@ -105,4 +102,4 @@ class VeiculoController {
     //     }
   };
 }
-module.exports = VeiculoController;
+module.exports = UsuarioController;

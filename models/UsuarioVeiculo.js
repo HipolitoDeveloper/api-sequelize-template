@@ -1,13 +1,9 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const Veiculo = require("Veiculo");
-const Usuario = require("Usuario");
-const database = require("../config/db");
+module.exports = (sqlite, Sequelize, usuario, veiculo) => {
+  const UsuarioVeiculo = sqlite.define("usuario_veiculo", {
+    data_reservado: Sequelize.DATE,
+  });
+  usuario.belongsToMany(veiculo, { through: UsuarioVeiculo });
+  veiculo.belongsToMany(usuario, { through: UsuarioVeiculo });
 
-const UsuarioVeiculo = database.define("usuario_veiculo", {
-  data_reservado: DataTypes.DATE,
-});
-
-Usuario.belongsToMany(Veiculo, { through: UsuarioVeiculo });
-Veiculo.belongsToMany(Usuario, { through: UsuarioVeiculo });
-
-module.exports = UsuarioVeiculo;
+  return UsuarioVeiculo;
+};

@@ -1,20 +1,24 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const database = require("../config/db");
+module.exports = (sqlite, Sequelize) => {
+  const Usuario = sqlite.define("usuario", {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
+    nome: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    senha: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+  });
 
-const Veiculo = database.define("veiculo", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
-  },
-  nome: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  reservado: {
-    type: DataTypes.BOOLEAN,
-  },
-});
-
-module.exports = Veiculo;
+  return Usuario;
+};

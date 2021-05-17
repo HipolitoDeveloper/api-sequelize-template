@@ -12,6 +12,8 @@ module.exports = (sqlite, Sequelize) => {
     },
     reservado: {
       type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   });
 
